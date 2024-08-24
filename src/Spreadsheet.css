@@ -1,0 +1,141 @@
+.spreadsheet {
+  color: #333;
+  width: 100%;
+  border-collapse: collapse;
+}
+.spreadsheet--disabled {
+  pointer-events: none;
+  opacity: .5;
+  user-select: none;
+}
+
+.spreadsheet td {
+  position: relative;
+}
+.spreadsheet th {
+  text-align: center;
+}
+
+/** The cells */
+.spreadsheet__corner,
+.spreadsheet__header_cell,
+.spreadsheet__line_number,
+.spreadsheet__cell {
+  border: 1px solid silver;
+  margin: 0 -1px -1px 0;
+  height: 28px;
+  position: relative;
+}
+
+/* Cell focused or cell input focused */
+.spreadsheet__cell:focus-within {
+  outline: 2px solid #1b73e3;
+  outline-offset: -2px;
+  z-index: 2;
+}
+.spreadsheet__cell:focus-within:not(:focus) {
+  box-shadow: 0 0 4px 1px rgba(0,0,0,.5);
+}
+
+/** The header */
+.spreadsheet thead {
+  background: #f8f9fa;
+}
+.spreadsheet__corner {
+  border-right: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+.spreadsheet__header_cell {
+  display: flex;
+  align-items: center;
+  padding-left: 2px;
+  min-width: 110px;
+  justify-content: center;
+}
+
+/** The line number on first cell of each line */
+.spreadsheet__line_number {
+  background: #f8f9fa;
+  color: #62666b;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  width: 45px;
+}
+.spreadsheet tbody tr:focus-within .spreadsheet__line_number {
+  background: #e8eaed;
+}
+
+/** The inputs */
+.spreadsheet input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  height: 24px;
+  padding: 2px;
+  margin: 0;
+  background: transparent;
+  cursor: default;
+}
+.spreadsheet input:focus {
+  cursor: text;
+  background: white;
+}
+.spreadsheet .txt-ellipsis input {
+  text-overflow: ellipsis; /* This is in a separate class for performance */
+}
+.spreadsheet__cell--type-number input {
+  font-family: monospace;
+  text-align: right;
+}
+
+/** Line selection */
+.spreadsheet__row--selected {
+  background: #e7f0fd;
+}
+.spreadsheet__row--selected .spreadsheet__cell {
+  z-index: 1;
+  border-top-color: #1b73e3;
+  border-right-color: #1b73e3;
+  border-bottom-color: #1b73e3;
+}
+.spreadsheet__row--selected td:nth-child(2) .spreadsheet__cell {
+  border-left-color: #1b73e3;
+}
+.spreadsheet__row--selected + .spreadsheet__row--selected .spreadsheet__cell {
+  border-top-color: silver;
+}
+.spreadsheet__row--selected .spreadsheet__line_number {
+  background: #5f6368;
+  color: white;
+}
+
+/** Context menu on line number **/
+.context_menu {
+  list-style: none;
+  padding: 4px 0;
+  margin: 0;
+  background: white;
+  position: absolute;
+  width: 190px;
+  color: #333;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.3);
+  z-index: 4;
+}
+.context_menu__item {
+  padding: 10px 0 10px 35px;
+  cursor: default;
+  user-select: none;
+}
+.context_menu__item:hover {
+  background: #f1f3f4;
+}
+.context_menu__item--disabled {
+  color: #9aa0a6;
+}
+.context_menu__item--disabled:hover {
+  background: transparent;
+}

@@ -28,18 +28,17 @@ function useMeasureText (ref: MutableRefObject<HTMLElement | null>, text: string
 export default React.memo(Cell)
 
 export type CellProps = {
-  name?: string;
   children?: any;
   cellPos: number;
   value: string;
-  onChange?: any;
+  onChange: (value: string, index: number) => void;
   isLastCell?: boolean;
   isFirstCell?: boolean;
   className?: string;
 }
 
 function Cell (props: CellProps) {
-  const { name, children, cellPos, value } = props
+  const { children, cellPos, value } = props
   const { onChange } = props
   const { isLastCell, isFirstCell, className } = props
 
@@ -79,7 +78,7 @@ function Cell (props: CellProps) {
 
       const prevRow = thisRow.previousElementSibling
       if (prevRow && prevRow instanceof HTMLTableRowElement) {
-        const cellElement = prevRow.cells[cellPos]
+        const cellElement = prevRow.cells[cellPos + 1]
         if (cellElement === null || cellElement === undefined || !(cellElement.firstElementChild instanceof HTMLElement)) {
           return
         }
@@ -99,7 +98,7 @@ function Cell (props: CellProps) {
         return
       }
 
-      const nextCell = thisRow.cells[cellPos + 1]
+      const nextCell = thisRow.cells[cellPos + 2]
       if (nextCell && nextCell.firstElementChild instanceof HTMLElement) {
         nextCell.firstElementChild.focus()
       }
@@ -119,7 +118,7 @@ function Cell (props: CellProps) {
 
       const nextRow = thisRow.nextElementSibling
       if (nextRow && nextRow instanceof HTMLTableRowElement) {
-        const cellElement = nextRow.cells[cellPos]
+        const cellElement = nextRow.cells[cellPos + 1]
         if (cellElement === null || cellElement === undefined || !(cellElement.firstElementChild instanceof HTMLElement)) {
           return
         }
@@ -142,7 +141,7 @@ function Cell (props: CellProps) {
         return
       }
 
-      const prevCell = thisRow.cells[cellPos - 1]
+      const prevCell = thisRow.cells[cellPos]
       if (prevCell && prevCell.firstElementChild instanceof HTMLElement) {
         prevCell.firstElementChild.focus()
       }
@@ -294,7 +293,7 @@ function Cell (props: CellProps) {
 
     // Delete cell's content
     else if (e.key === 'Delete') {
-      onChange('', name)
+      onChange('', cellPos)
       return
     }
 
@@ -319,7 +318,7 @@ function Cell (props: CellProps) {
     else if (e.ctrlKey && (e.key === 'x' || e.key === 'X')) {
       e.preventDefault()
       copy(value)
-      onChange('', name)
+      onChange('', cellPos)
       return
     }
 
@@ -346,14 +345,14 @@ function Cell (props: CellProps) {
     value: stateValue !== null ? stateValue : value,
     onFocus: () => setValue(value),
     onBlur: (e: FocusEvent<HTMLInputElement>) => {
-      onChange(e.target.value, name)
+      onChange(e.target.value, cellPos)
       setValue(null)
     },
     onChange: (e: ChangeEvent<HTMLInputElement>) => {
       if (inputIsFocused()) {
         setValue(e.target.value)
       } else {
-        onChange(e.target.value, name)
+        onChange(e.target.value, cellPos)
       }
     },
   }
