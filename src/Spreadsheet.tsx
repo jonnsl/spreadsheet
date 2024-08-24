@@ -92,7 +92,7 @@ export default class Spreadsheet extends PureComponent<SpreadsheetProps, Spreads
     if (columnIndex === -1) {
       return
     }
-    this.handleRowChange(rowIndex, replaceAt(row, columnIndex, plainText))
+    this.handleRowChange(rowIndex, replaceAt(row, columnIndex - 1, plainText))
   }
 
   deselectAll = (e: MouseEvent): void => {
