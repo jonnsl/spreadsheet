@@ -1,3 +1,4 @@
+/* src/Spreadsheet.css */
 .spreadsheet {
   color: #333;
   width: 100%;
@@ -8,15 +9,12 @@
   opacity: .5;
   user-select: none;
 }
-
 .spreadsheet td {
   position: relative;
 }
 .spreadsheet th {
   text-align: center;
 }
-
-/** The cells */
 .spreadsheet__corner,
 .spreadsheet__header_cell,
 .spreadsheet__line_number,
@@ -26,18 +24,14 @@
   height: 28px;
   position: relative;
 }
-
-/* Cell focused or cell input focused */
 .spreadsheet__cell:focus-within {
   outline: 2px solid #1b73e3;
   outline-offset: -2px;
   z-index: 2;
 }
 .spreadsheet__cell:focus-within:not(:focus) {
-  box-shadow: 0 0 4px 1px rgba(0,0,0,.5);
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, .5);
 }
-
-/** The header */
 .spreadsheet thead {
   background: #f8f9fa;
 }
@@ -52,8 +46,6 @@
   min-width: 110px;
   justify-content: center;
 }
-
-/** The line number on first cell of each line */
 .spreadsheet__line_number {
   background: #f8f9fa;
   color: #62666b;
@@ -67,8 +59,6 @@
 .spreadsheet tbody tr:focus-within .spreadsheet__line_number {
   background: #e8eaed;
 }
-
-/** The inputs */
 .spreadsheet input {
   width: 100%;
   border: 0;
@@ -84,14 +74,12 @@
   background: white;
 }
 .spreadsheet .txt-ellipsis input {
-  text-overflow: ellipsis; /* This is in a separate class for performance */
+  text-overflow: ellipsis;
 }
 .spreadsheet__cell--type-number input {
   font-family: monospace;
   text-align: right;
 }
-
-/** Line selection */
 .spreadsheet__row--selected {
   background: #e7f0fd;
 }
@@ -111,8 +99,6 @@
   background: #5f6368;
   color: white;
 }
-
-/** Context menu on line number **/
 .context_menu {
   list-style: none;
   padding: 4px 0;
@@ -122,7 +108,7 @@
   width: 190px;
   color: #333;
   border-radius: 4px;
-  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.3);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
   z-index: 4;
 }
 .context_menu__item {
@@ -139,3 +125,4 @@
 .context_menu__item--disabled:hover {
   background: transparent;
 }
+/*# sourceMappingURL=App.css.map */
