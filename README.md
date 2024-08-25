@@ -4,7 +4,7 @@ A spreadsheet like interface for React.js
 
 ## Demo
 
-Check out the demo here [here](https://jonnsl.github.io/spreadsheet/)
+Check out the demo [here](https://jonnsl.github.io/spreadsheet/)
 
 ## Installation
 
