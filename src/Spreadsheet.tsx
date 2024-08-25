@@ -162,8 +162,12 @@ export default class Spreadsheet extends PureComponent<SpreadsheetProps, Spreads
     })
   }
 
-  clearSelectedRows = (e: ReactMouseEvent<HTMLLIElement>): void => {
+  clearSelectedRowsReactEventHandler = (e: ReactMouseEvent<HTMLLIElement>): void => {
     e.preventDefault()
+    this.clearSelectedRows()
+  }
+
+  clearSelectedRows = (): void => {
     const { onChange, rows, createEmptyRow } = this.props
     const start: number = Math.min(this.state.selectedRowStart, this.state.selectedRowFinish)
     const finish: number = Math.max(this.state.selectedRowStart, this.state.selectedRowFinish)
@@ -234,8 +238,8 @@ export default class Spreadsheet extends PureComponent<SpreadsheetProps, Spreads
   maybeClearRow = (e: KeyboardEvent) => {
     // Alguma linha está selecionada e menu de contexto está fechado
     if (e.key === 'Delete' && this.state.selectedRowStart !== -1 && this.state.contextMenuOpenAt === -1) {
-      // FIXME
-      // this.clearSelectedRows(e)
+      e.preventDefault()
+      this.clearSelectedRows()
     }
   }
 
@@ -255,7 +259,7 @@ export default class Spreadsheet extends PureComponent<SpreadsheetProps, Spreads
               ? 'Delete row'
               : `Delete rows ${this.selectedRowStart + 1} - ${this.selectedRowFinish + 1}`
           }</Item>
-          <Item onClick={this.clearSelectedRows}>{
+          <Item onClick={this.clearSelectedRowsReactEventHandler}>{
             onlyOneLineSelected
               ? 'Clear row'
               : `Clear rows ${this.selectedRowStart + 1} - ${this.selectedRowFinish + 1}`
